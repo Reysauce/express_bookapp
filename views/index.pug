@@ -13,5 +13,8 @@ html
     h2 Your Interests
     ul
       each book in books
-        li: a(href='/book-detail/' + book.isbn)= book.title 
-    // Additional content can be added here
+        li: a(href='/book-detail/' + book.isbn) #{book.title} 
+ a(href="/edit/" + book.isbn) Edit
+    
+//- form(action="/" + book.isbn + "?_method=DELETE" method="POST") 
+//- button(type="submit") Delete

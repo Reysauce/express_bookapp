@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    title Express App
+  body
+    nav
+      ul
+        li: a(href='/home') Home
+        li: a(href='/about') About
+        li: a(href='/contact') Contact
+    h1 Enter in a new book!
+    p Add a new book.
+    form(action="/" method="POST")
+div
+label(for="isbn") ISBN: 
+input(type="text" name="isbn" id="isbn" required)
+div
+label(for="title") TITLE: 
+input(type="text" name="title" id="title" required)
+div
+label(for="subtitle") ISBN: 
+input(type="text" name="subtitle" id="subtitle" required)
+div
+label(for="author") ISBN: 
+input(type="text" name="author" id="author" required)
+div
+label(for="published") ISBN: 
+input(type="date" name="published" id="published" required)
+div
+label(for="publisher") ISBN: 
+input(type="text" name="publisher" id="publisher" required)
+div
+label(for="pages") ISBN: 
+input(type="number" name="pages" id="pages" required)
+div
+label(for="description") ISBN: 
+textarea(name="description" id="description" rows="5" required) 
+div
+button(type="submit") Add Book 
+a(href="/") Back to booklist 
+
+    
