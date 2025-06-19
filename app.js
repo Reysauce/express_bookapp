@@ -35,29 +35,36 @@ app.post("/", (req, res) => {
   book.create(req.body);
   res.redirect("/");
 });
-app.get("/edit/:id", (req, res) => {
-  try {
-    const isbn = req.params.id;
-    const book = books.findOne({isbn: isbn});
-    if (book) {
-      res.render("update", {book});
-    } else {
-      res.status(404).send("book not found");
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("server error");
+app.get("/:isbn/edit", (req, res) => {
+  // Fetch the book by ISBN and render the edit form
+  const book = books.find((book) => book.isbn === req.params.isbn);
+  if (!book) {
+    return res.status(404).send("Couldnt Find Book!");
   }
+  res.render("update", {book});
 });
-app.put("/:id", (req, res) => {
-  const isbn = req.params.id;
-  books.findOneAndUpdate({isbn: isbn}, req.body);
+app.put("/:isbn", (req, res) => {
+  const index = books.findIndex((book) => book.isbn === req.params.isbn);
+  if (index === -1) {
+    return res.status(404).send("Couldnt Find Book!");
+  }
+  // Handle updating the book
+  // Update book in database or array, then redirect
+  books[index] = {
+    ...books[index],
+    ...req.body,
+    isbn: req.params.isbn,
+  };
   res.redirect("/");
 });
-app.delete("/:id", (req, res) => {
-  books.deleteOne({isbn: req.params.id});
+app.delete("/:isbn", (req, res) => {
+  const index = books.findIndex((book) => book.isbn === req.params.isbn);
+  if (index === -1) {
+    return res.status(404).send("Couldnt Find Book!");
+  }
+  // Handle deleting the book
+  // Remove book from database or array, then redirect
+  books.splice(index, 1);
   res.redirect("/");
 });
-
-// Start the server
 app.listen(3000, () => console.log("Server running on port 3000"));

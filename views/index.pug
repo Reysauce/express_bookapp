@@ -13,8 +13,11 @@ html
     h2 Your Interests
     ul
       each book in books
-        li: a(href='/book-detail/' + book.isbn) #{book.title} 
- a(href="/edit/" + book.isbn) Edit
+        li 
+        a(href='/book-detail/' + book.isbn) #{book.title} 
+        //- a(href="/" + book.isbn + "/edit") Edit
     
-//- form(action="/" + book.isbn + "?_method=DELETE" method="POST") 
-//- button(type="submit") Delete
+        form(action="/" + book.isbn + "/edit" method="GET" style="display: inline;") 
+            button(type="submit") Edit
+        form(action="/" + book.isbn + "?_method=DELETE" method="POST" style="display: inline;") 
+            button(type="submit") Delete
