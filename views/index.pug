@@ -8,7 +8,7 @@ html
         li: a(href='/home') Home
         li: a(href='/about') About
         li: a(href='/contact') Contact
-    //- h1 Welcome, #{user.name}!
+    h1 Welcome!
     p Here's your personalized dashboard.
     h2 Your Interests
     ul
@@ -17,7 +17,7 @@ html
         a(href='/book-detail/' + book.isbn) #{book.title} 
         //- a(href="/" + book.isbn + "/edit") Edit
     
-        form(action="/" + book.isbn + "/edit" method="GET" style="display: inline;") 
+        form(action="/edit/" + book.isbn method="GET" style="display: inline;") 
             button(type="submit") Edit
         form(action="/" + book.isbn + "?_method=DELETE" method="POST" style="display: inline;") 
             button(type="submit") Delete
