@@ -22,16 +22,14 @@ app.get("/", async function (req, res) {
   const books = await Book.find();
   res.render("index", {books});
 });
-app.get("/book-detail/:isbn", (req, res) => {
-  const book = books.filter(checkBook);
+app.get("/book-detail/:isbn", async (req, res) => {
+  const book = await Book.find({isbn: isbn});
+  res.render("book-detail", {book});
+});
 
-  function checkBook(book) {
-    if (book.isbn === req.params.isbn) {
-      return book;
-    }
-  }
-
-  res.render("book-detail", {book: book[0], user: {name: `Rey`}});
+app.get("/:isbn", async (req, res) => {
+  const book = await Book.find({isbn: isbn});
+  res.render("update", {book});
 });
 
 app.get("/add", (req, res) => {
@@ -41,36 +39,48 @@ app.post("/add", async (req, res) => {
   await Book.create(req.body);
   res.redirect("/");
 });
-app.get("/:isbn/edit", (req, res) => {
-  // Fetch the book by ISBN and render the edit form
-  const book = books.find((book) => book.isbn === req.params.isbn);
-  if (!book) {
-    return res.status(404).send("Couldnt Find Book!");
-  }
-  res.render("update", {book});
-});
-app.put("/:isbn", (req, res) => {
-  const index = books.findIndex((book) => book.isbn === req.params.isbn);
-  if (index === -1) {
-    return res.status(404).send("Couldnt Find Book!");
-  }
-  // Handle updating the book
-  // Update book in database or array, then redirect
-  books[index] = {
-    ...books[index],
-    ...req.body,
-    isbn: req.params.isbn,
-  };
+// app.get("/:isbn/edit", (req, res) => {
+//   // Fetch the book by ISBN and render the edit form
+//   const book = books.find((book) => book.isbn === req.params.isbn);
+//   if (!book) {
+//     return res.status(404).send("Couldnt Find Book!");
+//   }
+//   res.render("update", {book});
+// });
+// app.put("/:isbn", (req, res) => {
+//   const index = books.findIndex((book) => book.isbn === req.params.isbn);
+//   if (index === -1) {
+//     return res.status(404).send("Couldnt Find Book!");
+//   }
+//   // Handle updating the book
+//   // Update book in database or array, then redirect
+//   books[index] = {
+//     ...books[index],
+//     ...req.body,
+//     isbn: req.params.isbn,
+//   };
+//   res.redirect("/");
+// });
+
+app.put("/:id", async function (req, res) {
+  const isbn = req.params.id;
+  await Book.findOneAndUpdate({isbn: isbn}, req.body);
   res.redirect("/");
 });
-app.delete("/:isbn", (req, res) => {
-  const index = books.findIndex((book) => book.isbn === req.params.isbn);
-  if (index === -1) {
-    return res.status(404).send("Couldnt Find Book!");
-  }
-  // Handle deleting the book
-  // Remove book from database or array, then redirect
-  books.splice(index, 1);
+
+// app.delete("/:isbn", (req, res) => {
+//   const index = books.findIndex((book) => book.isbn === req.params.isbn);
+//   if (index === -1) {
+//     return res.status(404).send("Couldnt Find Book!");
+//     }
+
+//   // Handle deleting the book
+//   // Remove book from database or array, then redirect
+//   books.splice(index, 1);
+//   res.redirect("/");
+// });
+app.delete("/:id", async function (req, res) {
+  await Book.deleteOne({isbn: req.params.id});
   res.redirect("/");
 });
 app.listen(3000, () => console.log("Server running on port 3000"));
