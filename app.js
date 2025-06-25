@@ -23,12 +23,12 @@ app.get("/", async function (req, res) {
   res.render("index", {books});
 });
 app.get("/book-detail/:isbn", async (req, res) => {
-  const book = await Book.find({isbn: isbn});
+  const book = await Book.findOne({isbn: req.params.isbn});
   res.render("book-detail", {book});
 });
 
 app.get("/edit/:isbn", async (req, res) => {
-  const book = await Book.find({isbn: req.params.isbn});
+  const book = await Book.findOne({isbn: req.params.isbn});
   res.render("update", {book});
 });
 

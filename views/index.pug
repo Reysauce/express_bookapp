@@ -17,7 +17,7 @@ html
         a(href='/book-detail/' + book.isbn) #{book.title} 
         //- a(href="/" + book.isbn + "/edit") Edit
     
-        form(action="/edit/" + book.isbn method="GET" style="display: inline;") 
+        form(action="/edit/" + book.isbn  method="GET" style="display: inline;") 
             button(type="submit") Edit
         form(action="/" + book.isbn + "?_method=DELETE" method="POST" style="display: inline;") 
             button(type="submit") Delete
