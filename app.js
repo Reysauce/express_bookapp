@@ -20,7 +20,7 @@ app.use(methodOverride("_method"));
 // Define routes here
 app.get("/", async function (req, res) {
   const books = await Book.find();
-  res.render("books", {books});
+  res.render("index", {books});
 });
 app.get("/book-detail/:isbn", (req, res) => {
   const book = books.filter(checkBook);
