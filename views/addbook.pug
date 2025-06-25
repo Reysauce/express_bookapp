@@ -11,32 +11,30 @@ html
     h1 Enter in a new book!
     p Add a new book.
     form(action="/add" method="POST")
-div
-label(for="isbn") ISBN: 
-input(type="text" name="isbn" id="isbn" required)
-div
-label(for="title") TITLE: 
-input(type="text" name="title" id="title" required)
-div
-label(for="subtitle") SUBTITLE: 
-input(type="text" name="subtitle" id="subtitle" required)
-div
-label(for="author") AUTHOR: 
-input(type="text" name="author" id="author" required)
-div
-label(for="published") PUBLISHED: 
-input(type="date" name="published" id="published" required)
-div
-label(for="publisher") PUBLISHER: 
-input(type="text" name="publisher" id="publisher" required)
-div
-label(for="pages") PAGES: 
-input(type="number" name="pages" id="pages" required)
-div
-label(for="description") DESCIPTION: 
-textarea(name="description" id="description" rows="5" required) 
-div
-button(type="submit") Add Book 
-a(href="/") Back to booklist 
-
-    
+      div
+        label(for="isbn") ISBN:
+        input(type="text" name="isbn" id="isbn" required)
+      div
+        label(for="title") TITLE:
+        input(type="text" name="title" id="title" required)
+      div
+        label(for="subtitle") SUBTITLE:
+        input(type="text" name="subtitle" id="subtitle" required)
+      div
+        label(for="author") AUTHOR:
+        input(type="text" name="author" id="author" required)
+      div
+        label(for="published") PUBLISHED:
+        input(type="date" name="published" id="published" required)
+      div
+        label(for="publisher") PUBLISHER:
+        input(type="text" name="publisher" id="publisher" required)
+      div
+        label(for="pages") PAGES:
+        input(type="number" name="pages" id="pages" required)
+      div
+        label(for="description") DESCRIPTION:
+        textarea(name="description" id="description" rows="5" required)
+      div
+        button(type="submit") Add Book 
+        a(href="/") Back to booklist
