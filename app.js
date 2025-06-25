@@ -3,7 +3,12 @@ const path = require("path");
 const app = express();
 const books = require("./book-data").books;
 const methodOverride = require("method-override");
+const Book = require("./models/Books");
+const mongoose = require("mongoose");
+require("dotenv").config();
 // Set the view engine to pug
+
+mongoose.connect(`${process.env.MONGO_DB_API_KEY}`);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -13,8 +18,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 // Define routes here
-app.get("/", (req, res) => {
-  res.render("index", {user: {name: `Rey`}, books});
+app.get("/", async function (req, res) {
+  const books = await Book.find();
+  res.render("books", {books});
 });
 app.get("/book-detail/:isbn", (req, res) => {
   const book = books.filter(checkBook);
