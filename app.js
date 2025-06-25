@@ -28,7 +28,7 @@ app.get("/book-detail/:isbn", async (req, res) => {
 });
 
 app.get("/:isbn/edit", async (req, res) => {
-  const book = await Book.find({isbn: isbn});
+  const book = await Book.find({isbn: req.params.isbn});
   res.render("update", {book});
 });
 
