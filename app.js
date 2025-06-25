@@ -37,8 +37,8 @@ app.get("/book-detail/:isbn", (req, res) => {
 app.get("/add", (req, res) => {
   res.render("addbook");
 });
-app.post("/", (req, res) => {
-  book.create(req.body);
+app.post("/add", async (req, res) => {
+  await Book.create(req.body);
   res.redirect("/");
 });
 app.get("/:isbn/edit", (req, res) => {
